@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+
+    <script>
+
+        let resultat;
+        let a = new Date().getHours();
+
+        if(a >= 5) {
+            resultat = "Godmorgen.";
+        } else if (a >= 10) {
+            resultat = "Goddag.";
+        } else if (a >= 18) {
+            resultat = "Godaften";
+        } else {
+            resultat = "Godnat";
+        }
+
+        console.log(resultat);
+
+    </script>
+</body>
+</html>
