@@ -98,14 +98,16 @@
     pic.src = "http://placeimg.com/640/480/nature/sepia";
     pic.alt = "Dette er en billedetekst";
 
-    const pic2 = document.querySelector("article:nth-child(2) img");
-    pic2.src = "http://placeimg.com/640/480/animals/sepia";
-    pic2.alt = "Dette er også en billedetekst";
-
     pic.addEventListener("click", changePhotoRandom);
     function changePhotoRandom() {
         pic.src = "http://placeimg.com/640/480/nature/sepia" + Math.round(Math.random()*10);
     }
+
+    const pic2 = document.querySelector("article:nth-child(2) img");
+    pic2.src = "http://placeimg.com/640/480/animals/sepia";
+    pic2.alt = "Dette er også en billedetekst";
+
+
 
     pic2.addEventListener("click", changePhotoRandom2);
     function changePhotoRandom2() {
