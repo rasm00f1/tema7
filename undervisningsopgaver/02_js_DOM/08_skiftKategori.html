@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML-Struktur</title>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        article {
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Titel</h1>
+    </header>
+    <main>
+
+        <h2>Undertitel1</h2>
+        <section>
+            <article>
+                <img src="http://placeimg.com/480/480/animal">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque dignissimos ipsa modi ad, molestias voluptate alias laboriosam, doloremque eius explicabo veritatis ea, repudiandae placeat quibusdam.</p>
+            </article>
+
+            <article>
+                <img src="http://placeimg.com/480/480/nature">
+                <h3>Article 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque dignissimos ipsa modi ad, molestias voluptate alias laboriosam, doloremque eius explicabo veritatis ea, repudiandae placeat quibusdam.</p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        This is the footer
+    </footer>
+
+<script>
+    //*Load document*//
+    document.addEventListener("DOMContentLoaded", start);
+    function start() {
+        console.log("Siden er nu loaded");
+    }
+
+    const header = document.querySelector("header");
+    console.log(header);
+
+    const overskrift = document.querySelector("h1");
+    console.log(overskrift.textContent);
+    overskrift.textContent = "Dette er den nye titel."
+
+    const article1text = document.querySelector("article:nth-child(1) p");
+    console.log(article1text);
+    article1text.innerHTML = "<b>Her er den nye tykke tekst til første artikel</b>";
+
+    const article2text = document.querySelector("article:nth-child(2) p");
+    console.log(article2text);
+    article2text.innerHTML = "<i>Her er den nye kursive tekst til den anden artikel</i>";
+
+    const section = document.querySelector("section");
+    console.log(section);
+
+    const article1 = document.querySelector("article:nth-child(1)");
+    console.log(article1);
+    const article1titel = document.querySelector("article:nth-child(1) h3");
+    console.log(article1titel.textContent);
+    article1titel.textContent = "Billede og noget tekst";
+
+    const article2 = document.querySelector("article:nth-child(2)");
+    console.log(article2);
+    const article2titel = document.querySelector("article:nth-child(2) h3");
+    console.log(article2titel.textContent);
+    article2titel.textContent = "Faktisk bare det samme som den første artikel";
+
+    const undertitel = document.querySelector("h2");
+    console.log(undertitel.textContent);
+
+    const footer = document.querySelector("footer");
+    console.log(footer.textContent);
+
+    //*Billedeændringer*//
+    const pic = document.querySelector("img:nth-child(1)");
+    pic.src = "http://placeimg.com/640/480/nature/sepia";
+    pic.alt = "Dette er en billedetekst";
+
+    pic.addEventListener("click", changePhotoRandom);
+    function changePhotoRandom() {
+        pic.src = "http://placeimg.com/640/480/nature/sepia" + Math.round(Math.random()*10);
+    }
+
+    const kategori = ["animals", "arch", "people", "nature", "tech"];
+    let pic2 =document.querySelector("article:nth-child(2) img")
+
+    pic2.addEventListener("click", skiftKategori);
+    function skiftKategori() {
+        const nummer = Math.round(Math.random() * 4);
+        pic2.src = "http://placeimg.com/640/480/" + kategori[nummer];
+        pic2.alt = kategori[nummer];
+    }
+</script>
+
+</body>
+
+
+</html>
