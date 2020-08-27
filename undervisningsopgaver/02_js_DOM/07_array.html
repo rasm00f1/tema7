@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<style>
+    body {
+        color: burlywood;
+    }
+
+    #display {
+        width: 20vw;
+        height: 20vw;
+        border: 1px solid silver;
+        margin: 7vw;
+        padding: 1vw;
+    }
+</style>
+
+<body>
+    <div id="display"></div>
+
+    <script>
+        let playlist = ["Make yourself", "Drive", "Kyoto", "We've got to try", "Don't think twice it's alright", "Infinite", "Sledgehammer", "Best part", "Compute", "Can I kick it?"];
+
+        playlist.forEach(sang => {
+            document.querySelector("#display").innerHTML += `${sang} <br>`;
+        })
+
+    </script>
+</body>
+
+</html>
