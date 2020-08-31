@@ -8,12 +8,21 @@
     <link rel="stylesheet" href="">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
+        h1 {
+            font-family: 'Bangers', cursive;
+            color: white;
+            font-weight: 300;
+            font-size: 80px;
+            text-shadow: 0px 0px 3px black;
+        }
+
         h2 {
             font-family: 'Bangers', cursive;
-            color: black;
+            color: white;
+            background: white;
             font-weight: 300;
             font-size: 45px;
-            background-color: #ffffff;
+            text-shadow: 0px 0px 3px black;
         }
 
         p {
@@ -70,6 +79,8 @@
        <button class="filter" data-køn="m">MÆND</button>
        <button class="filter" data-køn="k">KVINDER</button>
        <button class="filter" data-køn="andet">ANDET</button>
+
+       <h1>ALLE</h1>
    </header>
 
     <section id="contentContainer"></section>
@@ -131,6 +142,7 @@
 
         function filterBTNs() {
             filter = this.dataset.køn;
+            document.querySelector("h1").textContent = this.textContent;
             visPersoner();
         }
 
