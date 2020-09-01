@@ -180,8 +180,6 @@
                 console.log(person);
                 const klon = temp.cloneNode(true).content;
                 klon.querySelector(".navn").textContent = person.gsx$navn.$t;
-                klon.querySelector(".efternavn").textContent = person.gsx$efternavn.$t;
-                klon.querySelector(".køn").textContent = person.gsx$køn.$t;
                 klon.querySelector("img").src = person.gsx$billede.$t;
                 container.appendChild(klon);
                 }
