@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-family: 'Bowlby One SC', cursive;
+            color: white;
+            font-weight: 400;
+            font-size: 40px;
+            text-shadow: 1px 1px 3px #ada397;
+            padding-left: 20px;
+        }
+
+        h2 {
+            font-family: 'Bowlby One SC', cursive;
+            color: white;
+            font-weight: 300;
+            font-size: 35px;
+            text-shadow: 2px 2px 3px #53361d;
+        }
+
+        p {
+            font-family: 'Roboto Condensed', sans-serif;
+            color: white;
+            font-size: 20px;
+        }
+
+        #splash {
+            background-image: url(imgs/07_dynamisk_web_splash_bistro.jpg);
+            background-size: cover;
+            width: 1920px;
+            height: 320px;
+        }
+
+        #contentContainer {
+            width: 90vw;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fill,minmax(380px,1fr));
+            background-color: #e8ded1;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #contentContainer article {
+            border-radius: 5px;
+            background-color: #81675b;
+            padding: 5px;
+            align-content: space-between;
+            box-shadow: 1px 1px 3px #989898;
+        }
+
+        #contentContainer img {
+            object-fit: cover;
+            width: 375px;
+            height: 370px;
+        }
+
+        button {
+            padding: 5px;
+            border: none;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 18px;
+            background-color: white;
+        }
+
+        button:focus {
+            background-color: black;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #c45d3e;
+            color: white;
+        }
+
+        body {
+            background-color: #45372a;
+        }
+
+        #nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #e8ded1;
+        }
+
+
+        /** popup **/
+        #popup {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .8);
+            display: none;
+        }
+
+        #popup article {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80vw;
+            height: 80vh;
+            margin: 4rem auto;
+            background-color: #81675b;
+            border-radius: 5px;
+            box-shadow: 1px 1px 3px #989898;
+        }
+
+        #luk {
+            position: fixed;
+            top: 7.5vh;
+            right: 10vw;
+            background-color: white;
+            color: black;
+            border-radius: 2px;
+            padding: .1em;
+            border: none;
+            box-shadow: 0px 1px 2px grey;
+        }
+
+        .articleIndhold {
+            flex-basis: 300px;
+            flex-grow: 1;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        #popup img {
+            flex-grow: 1;
+            object-fit: cover;
+            width: 50%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+   <header>
+      <section id="splash"></section>
+
+      <div id="nav">
+       <button class="filter" data-kategori="alle">ALLE</button>
+       <button class="filter" data-kategori="forretter">FORRETTER</button>
+       <button class="filter" data-kategori="hovedretter">HOVEDRETTER</button>
+       <button class="filter" data-kategori="desserter">DESSERTER</button>
+        <button class="filter" data-kategori="drikkevarer">DRIKKEVARER</button>
+        <button class="filter" data-kategori="sideorders">SIDES</button>
+       <h1>ALLE</h1>
+       </div>
+   </header>
+
+   <section id="popup">
+
+       <article>
+           <img class="articleIndhold" src="" alt="">
+
+            <div class="articleIndhold">
+           <button id="luk">X</button>
+           <h2>Navn</h2>
+           <br>
+            <p>Oprindelse: <span class="oprindelsepop"></span></p>
+            <br>
+            <p>Om: <span class="langpop"></span></p>
+            <br>
+            <p>Pris: <span class="prispop"></span></p>
+            </div>
+       </article>
+   </section>
+
+    <section id="contentContainer"></section>
+
+    <template>
+        <article>
+            <h3></h3>
+            <img src="" alt="">
+            <h2 class="navn"></h2>
+            <p class="kort"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadJSON);
+
+
+        let filter = "alle";
+        let retter;
+        const popup = document.querySelector("#popup");
+
+        async function loadJSON() {
+            const JSONData = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
+            retter = await JSONData.json();
+            addEventListenersToButtons();
+            visRetter();
+        }
+
+        function visRetter() {
+
+        let container = document.querySelector("#contentContainer");
+        let temp = document.querySelector("template");
+        container.innerHTML = "";
+           retter.feed.entry.forEach(ret => {
+                if (filter == "alle" || filter == ret.gsx$kategori.$t) {
+                const klon = temp.cloneNode(true).content;
+                klon.querySelector(".navn").textContent = ret.gsx$navn.$t;
+                klon.querySelector(".kort").textContent = ret.gsx$kort.$t;
+                klon.querySelector(".pris").textContent = "Pris: " + ret.gsx$pris.$t + ".-";
+                klon.querySelector("img").src = "/imgs/small/" + ret.gsx$billede.$t + "-sm.jpg";
+
+                klon.querySelector("article").addEventListener("click", ()=>visDetaljer(ret));
+
+                container.appendChild(klon);
+                }
+            })
+        }
+
+        document.querySelector("#luk").addEventListener("click", ()=>popup.style.display="none");
+
+        function visDetaljer(ret) {
+            console.log(ret);
+             popup.style.display="block";
+            popup.querySelector("h2").textContent = ret.gsx$navn.$t;
+            popup.querySelector(".oprindelsepop").textContent = ret.gsx$oprindelse.$t;
+            popup.querySelector(".langpop").textContent = ret.gsx$lang.$t;
+            popup.querySelector(".prispop").textContent = ret.gsx$pris.$t;
+            popup.querySelector("img").src = "/imgs/large/" + ret.gsx$billede.$t + ".jpg";
+
+        }
+
+        function addEventListenersToButtons() {
+            document.querySelectorAll(".filter").forEach((btn) => {
+                btn.addEventListener("click", filterBTNs);
+            });
+        }
+
+        function filterBTNs() {
+            filter = this.dataset.kategori;
+            document.querySelector("h1").textContent = this.textContent;
+            visRetter();
+        }
+
+        loadJSON();
+
+    </script>
+</body>
+
+</html>
