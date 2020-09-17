@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deciBel - Rasmus P</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300;1,400&family=Syne&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="pics/decibel_logo.png">
+    <link rel="stylesheet" href="styleprofile.css">
+</head>
+
+
+
+
+<body>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        <div class="overlay-content">
+            <a href="index.html">Profiler</a>
+            <input type="text">
+        </div>
+    </div>
+    <header>
+        <span id="openbtn">&#9776; </span>
+        <a href="index.html"><img src="pics/decibel_logo.svg" class="logomobile sh" alt="Logo"></a>
+        <a href="index.html"><img src="pics/decibel_logo_farve.svg" class="logomobile farve shownone" alt="Logo"></a>
+
+        <nav>
+            <a href="index.html" class="logo sh"><img src="pics/decibel_logo.svg" alt="Logo"></a>
+            <a href="index.html" class="logo farve shownone"><img src="pics/decibel_logo_farve.svg" alt="Logo"></a>
+            <ul id="menu" class="hidden">
+                <li><input type="text"></li>
+                <li><a href="person_galleri.html">Profiler</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="popup">
+        <article id="pop">
+
+            <div class="billederamme"><img src="" alt="" class="pop_billede"></div>
+               <p>Udvalgt sang: </p>
+                <iframe class="pop_spotify" src="" width="360" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <p><b>Kunstner: <span class="pop_kunstner"></span></b></p>
+                <p>Titel: <span class="pop_titel"></span></p>
+                <p>Genre: <span class="pop_genre"></span></p>
+                <p>Årstal: <span class="pop_årstal"></span></p>
+                <p class="pop_beskrivelse"><i>Beskrivelse: </i></p>
+
+            <!--
+            <a href=""><button>Mere info<span class="pop_info"></span></button></a>
+            <button>Youtube<span class="pop_youtube"></span></button>
+-->
+            <div id="luk">X</div>
+        </article>
+    </section>
+
+    <section class="profil_wrapper">
+        <img src="pics/rasmusp.jpg" alt="profilbillede" class="profilbillede">
+
+
+    </section>
+
+
+    <nav id="filter">
+        <button class="filter valgt" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="Rock">Rock</button>
+        <button class="filter" data-kategori="Pop">Pop</button>
+        <button class="filter" data-kategori="Elektronisk">Elektronisk</button>
+        <button class="filter" data-kategori="Country">Country</button>
+        <button class="filter" data-kategori="Hip Hop">Hip Hop</button>
+        <button class="filter" data-kategori="Jazz">Jazz</button>
+        <button class="filter" data-kategori="Funk">Funk</button>
+    </nav>
+
+    <h1>Rasmus Petersen anbefaler</h1>
+    <section id="liste">
+    </section>
+    <main>
+        <template>
+            <article class="album">
+                <h2 class="kunstner"></h2>
+                <i><h2 class="titel"></h2></i>
+                <img src="" alt="" class="billede">
+            </article>
+        </template>
+
+    </main>
+
+
+    <script>
+        //Siden loades
+
+        window.addEventListener("load", sidenVises);
+
+        //Burgermenuen bliver gjort funktionel ved eventListeners på elementerne
+        //Kalder logo skift funktionen
+
+        function sidenVises() {
+            console.log(sidenVises);
+
+            document.querySelector(".closebtn").addEventListener("click", closeNav);
+            document.getElementById("openbtn").addEventListener("click", openNav);
+
+            startHoverLogo();
+        }
+
+        //Functioner der 'styler' på bredden af mobile menuen, så den bliver henholdsvis vist og skjult.
+        //Ved hjælp af CSS bliver det gjort med en transition.
+
+        function openNav() {
+            document.getElementById("myNav").style.width = "60%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+
+        //Function der udskifter sort/hvid logo til farve logo ved mouseover.
+        //Virker desværre kun på mobile, hvor funktionen er ret ueffektiv.
+
+        function startHoverLogo() {
+            console.log("startHoverLogo");
+
+            document.querySelector(".sh").addEventListener("mouseover", shiftLogo);
+        }
+
+        function shiftLogo() {
+            console.log("shiftLogo");
+
+            /* fjerne og sæt eventlistenere */
+            document.querySelector(".farve").addEventListener("mouseout", shiftLogoHover);
+            document.querySelector(".sh").removeEventListener("mouseover", shiftLogo);
+
+            document.querySelector(".farve").classList.remove("shownone");
+            document.querySelector(".sh").classList.add("shownone");
+        }
+
+        function shiftLogoHover() {
+            console.log("shiftLogoHover");
+
+            /* fjerne og sæt eventlistenere */
+            document.querySelector(".farve").removeEventListener("mouseout", shiftLogoHover);
+            document.querySelector(".sh").addEventListener("mouseover", shiftLogo);
+
+            document.querySelector(".farve").classList.add("shownone");
+            document.querySelector(".sh").classList.remove("shownone");
+        }
+
+        //Opretter variable der skal bruges i loopet og filtreringen
+        let filter = "alle";
+        let albums;
+        //Når DOM contentet er loaded startes funktionen der henter JSON-dataen
+        //*Opretter konstante der bruges i hentdata funktionen (bemærk linket er forskelligt for hver HTML-side)*//
+        document.addEventListener("DOMContentLoaded", hentdata);
+        const link = "https://spreadsheets.google.com/feeds/list/1o-c5SGgVxNscxIp_ZYYrj3QcOFSASYVPxXuzDaYfM_E/od6/public/values?alt=json";
+        const popup = document.querySelector("#popup");
+
+        //funktion der henter JSON/Google Sheet data, starter loopet
+        async function hentdata() {
+            const respons = await fetch(link);
+            albums = await respons.json();
+            addEventListenersToButtons();
+            visAlbums();
+        }
+
+        //Funktionen fanger elementer fra DOM'en og indsætter data fra JSON'en
+        function visAlbums() {
+            const container = document.querySelector("#liste");
+            const albumTemplate = document.querySelector("template");
+        //Her ændre funktionen den tekst der viser hvor man er henne i filtreringen
+            container.innerHTML = "";
+        //Som udgangspunkt er filtreringen sat til 'alle' og derfor vises alle elementer
+        //Alt efter hvor man klikker sig hen i filtreringen er det kun de relevante elementer der vises
+            albums.feed.entry.forEach(album => {
+                if (filter == "alle" || filter == album.gsx$genre.$t) {
+                    let klon = albumTemplate.cloneNode(true).content;
+                    klon.querySelector(".kunstner").textContent += album.gsx$kunstner.$t;
+                    klon.querySelector(".titel").textContent += album.gsx$titel.$t;
+                    klon.querySelector(".billede").src = `pics/${album.gsx$billede.$t}` + ".jpg";
+
+        //Ved klik på en af elementerne i loopet åbnes der et pop-up, med mere information
+                    klon.querySelector("article").addEventListener("click", () => visDetaljer(album));
+
+                    container.appendChild(klon);
+
+
+                }
+            })
+        }
+
+        //Pop-up'en bliver synlig, og data'en fra JSON'en bliver indsat på samme måde som i loopet
+        function visDetaljer(album) {
+            popup.style.display = "block";
+            popup.querySelector(".pop_kunstner").textContent = album.gsx$kunstner.$t;
+            popup.querySelector(".pop_titel").textContent = album.gsx$titel.$t;
+            popup.querySelector(".pop_genre").textContent = album.gsx$genre.$t;
+            popup.querySelector(".pop_årstal").textContent = album.gsx$årstal.$t;
+            popup.querySelector(".pop_beskrivelse").textContent = album.gsx$beskrivelse.$t;
+            popup.querySelector(".pop_spotify").src = album.gsx$spotify.$t;
+            popup.querySelector(".pop_billede").src = `pics/${album.gsx$billede.$t}` + ".jpg";
+
+
+        }
+
+        function addEventListenersToButtons() {
+            document.querySelectorAll(".filter").forEach((btn) => {
+                btn.addEventListener("click", filterBTNs);
+            })
+        }
+
+        document.querySelector("#luk").addEventListener("click", lukPopup);
+
+        function lukPopup() {
+            popup.style.display = "none";
+        }
+
+
+        function filterBTNs() {
+            filter = this.dataset.kategori;
+            document.querySelector("h1").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach((btn) => {
+                btn.classList.remove("valgt");
+            })
+            this.classList.add("valgt");
+            visAlbums();
+
+        }
+    </script>
+</body></html>

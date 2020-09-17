@@ -1,0 +1,459 @@
+/* -------------------- Generelt -------------------- */
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.sectionwrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.column {
+    flex-grow: 1;
+    flex-basis: 400px;
+}
+
+/* -------------------- Typografi -------------------- */
+
+h1 {
+    padding-top: 40px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1100px;
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    text-shadow: 1px 1px 1px #bebdbd;
+}
+
+h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+    line-height: 1.2rem;
+}
+
+a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+/* -------------------- Buttons -------------------- */
+
+.blue_button {
+    margin-top: 20px;
+    padding: 10px 65px;
+    font-family: 'roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    background-color: #0C8999;
+    border-radius: 5px;
+
+}
+
+.call-to-action {
+    margin-top: 20px;
+}
+
+/* -------------------- Navigation & header -------------------- */
+
+nav {
+    display: none;
+}
+
+.logo {
+    width: 100px;
+    height: 81.5px;
+    margin-left: 25vw;
+}
+
+.logomobile {
+    width: 80px;
+    height: 80px;
+    margin-left: 38vw;
+}
+
+header {
+    background-color: white;
+    height: 50px;
+}
+
+#menu {
+    padding-top: 10px;
+    list-style: none;
+    transition: transform 0.3s;
+    transform-origin: top left;
+    background-color: #fff;
+    height: 100%;
+    width: 80%;
+    position: absolute;
+    z-index: 2;
+}
+
+#menu a {
+    color: #000;
+    text-decoration: none;
+    font-family: 'Roboto', serif;
+    font-weight: 300;
+}
+
+#menu a:hover {
+    color: #EB9452;
+}
+
+.overlay {
+    height: 20%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(71, 71, 71, 0.95);
+    overflow-x: hidden;
+    transition: 0.3s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fefefe;
+    display: block;
+    transition: 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+.overlay a:hover {
+    color: #fff;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 50px;
+}
+
+#openbtn {
+    position: absolute;
+    top: 2vw;
+    left: 6vw;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+/* -------------------- Classes -------------------- */
+.shownone {
+    display: none;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.center-align {
+    text-align: center;
+}
+
+.cursive {
+    font-style: italic;
+}
+
+.space {
+    margin-top: 25px;
+}
+
+.grey-bg {
+    background-color: #ebebeb;
+}
+
+/* -------------------- Forside - Splash -------------------- */
+
+#splash {
+    background-image: url(pics/decibel_splash.jpg);
+    background-size: cover;
+    background-position: 39% 50%;
+    max-width: 1920px;
+    width: 100%;
+    height: 100vh;
+    max-height: 720px;
+}
+
+
+/* -------------------- Forside - info -------------------- */
+
+#info {
+    padding-top: 50px;
+    background-color: #DBD2C5;
+}
+
+#info .column {
+    margin: 0px;
+    margin-bottom: 0px;
+    padding: 20px;
+}
+
+#info img {
+    width: 100%;
+}
+
+#info .call-to-action {
+    padding-bottom: 50px;
+}
+
+/* -------------------- Forside - testimonials -------------------- */
+
+#testimonials {
+    background-color: #ebebeb;
+    padding: 50px 0;
+}
+
+#testimonials .column {
+    margin: 0px;
+    margin-bottom: 0px;
+    padding: 20px;
+}
+
+#testimonials img {
+    width: 100%;
+}
+
+#testimonials img {
+    width: 45%;
+    margin-bottom: 25px;
+}
+
+.slideshow-container {
+    font-family: 'roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.slideshow-container h4 {
+    font-family: 'roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.prev {
+    margin-right: 10px;
+    font-family: 'roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.author {
+    margin-top: 10px;
+}
+
+.next {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+/* -------------------- Footer -------------------- */
+
+footer {
+    background-color: #504c4c;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer p {
+    font-weight: 500;
+}
+
+.column-small {
+    font-family: 'roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+.column-small a {
+    font-family: 'roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.column-small ul {
+    list-style: none;
+}
+
+
+footer .sectionwrapper {
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#footer_logo {
+    opacity: 1;
+    height: 160px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+.socials {
+    margin-right: 25px;
+    margin-top: 20px;
+}
+
+
+input {
+    background-color: #dddddd;
+    border: none;
+    border-radius: 4px;
+    color: #585858;
+    font-family: sans-serif;
+}
+
+#quote {
+    height: 120px
+}
+
+/* -------------------- Mediaqueries -------------------- */
+
+@media (min-width: 900px) {
+
+    body {}
+
+    header {}
+
+    nav {
+        max-width: 1100px;
+        margin: 0 auto;
+        height: 90px;
+    }
+
+    #menu {
+        transition: none;
+        background-color: transparent;
+        text-align: end;
+
+    }
+
+    ul#menu {
+        max-width: 1920px;
+        margin: 0 auto;
+        margin-top: 0px;
+    }
+
+    #menu-button {
+        display: none;
+    }
+
+    #menu.hidden {
+        transform: translateX(-2vw);
+        opacity: 1;
+    }
+
+    #menu li {
+        display: inline-block;
+        margin-right: 40px;
+    }
+
+    a.logo img {
+        width: 80px;
+        height: 80px;
+        left: 5vw;
+        position: fixed;
+        z-index: 3;
+    }
+
+    section {
+        max-width: 1920px;
+    }
+
+
+    .sectionwrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    .column-small {
+        margin-top: 35px;
+    }
+
+    #info {
+        padding-top: 0px;
+    }
+
+    #info .column {
+        margin: 20px;
+    }
+
+    #testimonials .column {
+        margin: 20px;
+        margin-bottom: 0px;
+        padding: 20px;
+    }
+
+    .column-small:first-child {
+        margin-top: 0px;
+    }
+
+    nav {
+        display: block;
+    }
+
+    #openbtn {
+        display: none;
+    }
+
+    .logomobile {
+        display: none;
+    }
+
+
+    #footer_logo {
+        margin-left: -40px;
+        margin-right: 40px;
+    }
+
+
+}
